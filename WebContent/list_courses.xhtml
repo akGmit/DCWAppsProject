@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+						xmlns:h="http://xmlns.jcp.org/jsf/html"
+						xmlns:f="http://xmlns.jcp.org/jsf/core"
+						xmlns:p="http://primefaces.org/ui">
+		<h:head>
+			<meta charset="UTF-8" />
+			<title>Insert title here</title>
+			<h:outputStylesheet library="css" name="tables.css" />
+			<h:outputStylesheet library="css" name="styles.css" />
+			<f:metadata>
+				<f:event type="preRenderView"
+					listener="#{courseController.loadCourses()}" />
+			</f:metadata>
+		</h:head>
+		<body>
+		
+		
+			<f:view>
+				<h:form id="thisform">
+				<h:messages globalOnly="true" styleClass="error" />
+				<h:message id="message" for="delete"/>
+				<h:commandButton value="Add Course" action="add_course"></h:commandButton>
+				<h:dataTable value="#{courseController.courses}" var="course"
+					styleClass="table" headerClass="table-header"
+					rowClasses="table-odd-row,table-even-row">
+					<h:column>
+						<f:facet name="header">Course ID</f:facet>
+			     #{course.cid}
+			   </h:column>
+					<h:column>
+						<f:facet name="header">Course name</f:facet>
+		      #{course.cname}
+			   </h:column>
+					<h:column>
+						<f:facet name="header">Course duration</f:facet>
+		      #{course.duration}
+			   </h:column>
+					
+					<h:column>
+						
+						<f:facet name="header">Action</f:facet>
+						<h:link value="Show students" outcome="course_student_details">
+								<f:param name="cid" value="#{course.cid}" />
+							</h:link>&#160;
+					<h:commandLink id="delete" value="Delete" action="#{courseController.deleteCourse(course.cid)}">
+				</h:commandLink>
+					</h:column>
+				
+				</h:dataTable>
+				<h:link value="Home" outcome="index" />
+			</h:form>
+			</f:view>
+		</body>
+		</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<h:html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<title>DCW Project 2018/19</title>
+	<h:outputStylesheet library="css" name="styles.css" />
+	<h:messages globalOnly="true" styleClass="error" />
+</h:head>
+<h:body>
+<h:message for="submit" styleClass="error"/>
+	<h3>Add Student</h3>
+
+	<h:form>
+		<h:panelGrid id="add_student_panel" columns="3"
+			cellpadding="0" cellspacing="1" var="student">
+
+			<h:outputLabel value="Student ID" />
+			<h:inputText id="sid" value="#{student.sid}" required="true"
+				requiredMessage="Student ID is mandatory" />
+			<h:message for="sid" styleClass="error"/>
+			<h:outputLabel value="Name:" />
+			<h:inputText id="name" value="#{student.name}" required="true"
+				requiredMessage="Name is mandatory" />
+			<h:message for="name" styleClass="error"/>
+			<h:outputLabel value="Address:" />
+			<h:inputText value="#{student.address}" />
+			<h:outputText style="display: none"></h:outputText>
+			<h:outputLabel value="Course ID:" />
+			<h:inputText id="cid" value="#{student.cid}" required="true"
+				requiredMessage="Course ID is mandatory" />
+			<h:message for="cid" styleClass="error"/>
+			<f:facet name="footer">
+					<h:commandButton id="submit" type="submit" value="Add"
+						action="#{studentController.addStudent(student)}" />
+			</f:facet>
+		</h:panelGrid>
+		<h:link value="Home" outcome="index" />&#160;
+		<h:link value="Students" outcome="list_students" />
+	</h:form>
+</h:body>
+</h:html>

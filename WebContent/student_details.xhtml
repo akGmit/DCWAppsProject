@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<h:html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+
+	<h:outputStylesheet library="css" name="styles.css" />
+	<h:outputStylesheet library="css" name="tables.css" />
+	<f:metadata>
+		<f:event type="preRenderView"
+			listener="#{studentController.loadStudentDetails()}" />
+	</f:metadata>
+	
+</h:head>
+<h:body>
+	
+	<h:form id="student_details">
+		<h:messages globalOnly="true" styleClass="error" />
+	<h:message id="message" for="student_details"/>
+	<h3>Full Student Details</h3>
+		<h:dataTable value="#{studentController.studentDetails}" var="s"
+			styleClass="table" headerClass="table-header"
+			rowClasses="table-odd-row,table-even-row">
+			<h:column>
+				<f:facet name="header">Student ID</f:facet>
+           		#{s.get(0).sid}
+            </h:column>
+			<h:column>
+				<f:facet name="header">Student name</f:facet>
+				#{s.get(0).name}
+            </h:column>
+			<h:column>
+				<f:facet name="header">Course ID</f:facet>
+				#{s.get(1).cid}
+            </h:column>
+			<h:column>
+				<f:facet name="header">Course Name</f:facet>
+               #{s.get(1).cname}
+            </h:column>
+			<h:column>
+				<f:facet name="header">Course Duration</f:facet>
+               #{s.get(1).duration}
+            </h:column>
+		</h:dataTable>
+	</h:form>
+	<h:link value="Home" outcome="index" />&#160;
+	<h:link value="Students" outcome="list_students" />
+</h:body>
+</h:html>
